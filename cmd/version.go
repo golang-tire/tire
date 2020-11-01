@@ -12,9 +12,9 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number of generator",
+	Short: "Print the version number of cli",
 	Long:  `All software has versions.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("tire cli v0.1 -- HEAD")
+		fmt.Println("tire cli v0.1.1 -- HEAD")
 	},
 }
