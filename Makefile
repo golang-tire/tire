@@ -24,6 +24,11 @@ test: ## run unit tests
 build:  ## build the tire cli binary
 	CGO_ENABLED=0 go build ${LDFLAGS} -a -o dist/tire $(MODULE)
 
+
+.PHONY: install
+install:  ## build and install the tire cli binary
+	CGO_ENABLED=0 go install ${LDFLAGS}
+
 .PHONY: version
 version: ## display the version of the tire cli
 	@echo $(VERSION)

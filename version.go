@@ -1,13 +1,17 @@
-package cmd
+package main
 
 import (
 	"fmt"
 
+	"github.com/golang-tire/tire/cmd"
+
 	"github.com/spf13/cobra"
 )
 
+var Version string
+
 func init() {
-	RootCmd.AddCommand(versionCmd)
+	cmd.RootCmd.AddCommand(versionCmd)
 }
 
 var versionCmd = &cobra.Command{
@@ -15,6 +19,6 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version number of cli",
 	Long:  `All software has versions.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("tire cli v0.1.1 -- HEAD")
+		fmt.Printf("tire cli %s -- HEAD\n", Version)
 	},
 }
