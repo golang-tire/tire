@@ -27,7 +27,7 @@ build:  ## build the tire cli binary
 
 .PHONY: install
 install:  ## build and install the tire cli binary
-	CGO_ENABLED=0 go install ${LDFLAGS}
+	CGO_ENABLED=0 go install ${LDFLAGS} cmd/tire/tire.go
 
 .PHONY: version
 version: ## display the version of the tire cli
