@@ -14,21 +14,26 @@ tire --help
 ```
 
 ```
+
+    tire generate golang projects
+
+    Find more information at:
+                https://github.com/golang-tire
+
 Usage:
   tire [flags]
   tire [command]
 
 Available Commands:
-  help          Help about any command
-  new-service   create a service
-  swagger-to-go wrap swagger json file into a golang file and register it
-                in grpcgw package to show as service doc
-  version       Print the version number of cli
+  embed       embed static codes into golang files
+  gen         generate codes based on selected type
+  help        Help about any command
+  version     Print the tire cli version
 
 Flags:
-  -h, --help   help for tire
-
-Use "tire [command] --help" for more information about a command.
+  -h, --help                    help for tire
+      --profile string          Name of profile to capture. One of (none|cpu|heap|goroutine|threadcreate|block|mutex) (default "none")
+      --profile-output string   Name of the file to write the profile to (default "profile.pprof")
 ```
 
 
