@@ -30,7 +30,7 @@ func NewCmdGen(baseName string) *cobra.Command {
 	o.cmdBaseName = baseName
 
 	cmd := &cobra.Command{
-		Use:                   "gen [type]",
+		Use:                   "gen",
 		DisableFlagsInUseLine: true,
 		Short:                 "generate codes based on selected type",
 		Long:                  genLong,
@@ -40,8 +40,7 @@ func NewCmdGen(baseName string) *cobra.Command {
 		},
 	}
 
-	util.AddDryRunFlag(cmd)
-	cmd.AddCommand(NewCmdSwagger(genBaseName))
+	//cmd.AddCommand(embed.NewCmdSwagger(genBaseName))
 	return cmd
 }
 

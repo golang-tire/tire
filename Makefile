@@ -22,7 +22,7 @@ test: ## run unit tests
 
 .PHONY: build
 build:  ## build the tire cli binary
-	CGO_ENABLED=0 go build ${LDFLAGS} -a -o dist/tire $(MODULE)
+	CGO_ENABLED=0 go build ${LDFLAGS} -a -o dist/tire cmd/tire/tire.go
 
 
 .PHONY: install

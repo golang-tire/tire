@@ -1,44 +1,16 @@
 package engine
 
 import (
-	"os"
-	"path"
-	"strings"
+	"io"
 	"text/template"
+
+	"github.com/Masterminds/sprig/v3"
 )
 
-type Package struct {
-	Name        string
-	NamePlural  string
-	EntityAlias string
-}
-
-type Data struct {
-	Pkg Package
-}
-
-func Render(tpl, outputDir, fileName string, data Data) error {
-
-	funcMap := template.FuncMap{
-		"lower": strings.ToLower,
-	}
-
-	tmpl, err := template.New(fileName).Funcs(funcMap).Parse(tpl)
+func Render(tpl string, data interface{}, wr io.Writer) error {
+	tmpl, err := template.New("render").Funcs(sprig.TxtFuncMap()).Parse(tpl)
 	if err != nil {
 		return err
 	}
-
-	err = os.MkdirAll(outputDir, os.ModePerm)
-	if err != nil {
-		return err
-	}
-
-	outputFile := path.Join(outputDir, fileName)
-	f, err := os.Create(outputFile)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	return tmpl.Execute(f, data)
+	return tmpl.Execute(wr, data)
 }

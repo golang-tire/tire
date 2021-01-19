@@ -4,6 +4,8 @@ import (
 	"flag"
 	"strings"
 
+	"github.com/golang-tire/tire/internal/cmd/embed"
+
 	"github.com/golang-tire/tire/internal/cmd/gen"
 
 	"github.com/golang-tire/tire/internal/cmd/version"
@@ -35,6 +37,7 @@ func NewTireCommand() *cobra.Command {
 	cmds.PersistentFlags().AddGoFlagSet(flag.CommandLine)
 
 	cmds.AddCommand(gen.NewCmdGen(baseName))
+	cmds.AddCommand(embed.NewCmdEmbed(baseName))
 	cmds.AddCommand(version.NewCmdVersion())
 
 	return cmds

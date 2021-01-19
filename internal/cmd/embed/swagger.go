@@ -1,15 +1,18 @@
-package gen
+package embed
 
 import (
 	"github.com/golang-tire/tire/internal/cmd/util"
+	"github.com/golang-tire/tire/internal/swagger"
 
 	"github.com/spf13/cobra"
 )
 
 // SwaggerOptions defines flags and other configuration parameters for the `swagger` command
 type SwaggerOptions struct {
-	DryRun      bool
-	cmdBaseName string
+	JsonFile      string
+	OutputFile    string
+	OutputPackage string
+	cmdBaseName   string
 }
 
 var (
@@ -20,8 +23,10 @@ var (
 // NewSwaggerOption creates new ApplyOptions for the `swagger` command
 func NewSwaggerOption() *SwaggerOptions {
 	return &SwaggerOptions{
-		DryRun:      false,
-		cmdBaseName: "",
+		JsonFile:      "",
+		OutputFile:    "Stdout",
+		OutputPackage: "",
+		cmdBaseName:   "",
 	}
 }
 
@@ -40,15 +45,17 @@ func NewCmdSwagger(baseName string) *cobra.Command {
 			util.CheckErr(o.Run())
 		},
 	}
+	cmd.Flags().StringVarP(&o.JsonFile, "json-file", "i", o.JsonFile, "path to swagger json file")
+	cmd.Flags().StringVarP(&o.OutputFile, "output-file", "o", o.OutputFile, "Full path to output golang file or 'Stdout'")
+	cmd.Flags().StringVarP(&o.OutputPackage, "output-pkg", "p", o.OutputPackage, "Output package name")
 	return cmd
 }
 
 func (o *SwaggerOptions) Complete(cmd *cobra.Command) error {
 	var err error
-	o.DryRun, err = util.GetDryRun(cmd)
 	return err
 }
 
 func (o *SwaggerOptions) Run() error {
-	return nil
+	return swagger.EmbedSwagger(o.JsonFile, o.OutputFile, o.OutputPackage)
 }
